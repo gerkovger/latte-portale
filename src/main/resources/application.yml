@@ -1,0 +1,25 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: py_route
+          uri: http://localhost:8881
+          predicates:
+            - Path=/pypy
+          filters:
+            - RewritePath=/pypy,/
+        - id: cioco
+          uri: http://localhost:8882
+          predicates:
+            - Path=/cioco
+          filters:
+            - RewritePath=/cioco,/
+
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
